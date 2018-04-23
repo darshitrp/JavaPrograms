@@ -1,9 +1,6 @@
 package com.darshitpanchal;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -90,6 +87,21 @@ public class Main {
                     break;
 
                 case 3:
+                    if(forward){
+                        if(listIterator.hasPrevious()){
+                            System.out.println("Now replaying " + listIterator.previous().toString());
+                            forward = false;
+                        }else{
+                            System.out.println("We are at the start of the list.");
+                        }
+                    }else{
+                        if(listIterator.hasNext()){
+                            System.out.println("Now replaying " + listIterator.next().toString());
+                            forward = true;
+                        }else{
+                            System.out.println("We are at the end of the list.");
+                        }
+                    }
                     break;
 
                 case 4:
@@ -99,6 +111,19 @@ public class Main {
                 case 5:
                     printMenu();
                     break;
+
+                case 6:
+                    if(playList.size() > 0){
+                        listIterator.remove();
+                        if(listIterator.hasNext()){
+                            System.out.println("Now playing " + listIterator.next());
+                        }else{
+                            if(listIterator.hasPrevious()){
+                                System.out.println("Now playing " + listIterator.previous());
+                            }
+                        }
+                    }
+                    break;
             }
         }
     }
@@ -107,9 +132,21 @@ public class Main {
         System.out.println("Available actions:\nPress");
         System.out.println("0 - To quit\n" +
                 "1 - To play next song\n" +
-                "2 - To play previous song" +
+                "2 - To play previous song\n" +
+                "2 - To play previous song\n" +
                 "3 - To replay current song\n" +
                 "4 - List songs in playlist\n" +
-                "5 - Print Menu\n");
+                "5 - Print Menu\n" +
+                "6 - Delete current song from playlist");
     }
+
+    private static void printList(LinkedList<Song> playList){
+        Iterator<Song> iterator = playList.iterator();
+        System.out.println("=======================");
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+        System.out.println("=======================");
+    }
+
 }
